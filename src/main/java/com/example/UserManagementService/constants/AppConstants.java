@@ -8,6 +8,8 @@ public class AppConstants {
     public static final String USER_DELETE_FAIL= "UserDeleteFail";
     public static final String USER_UPDATESTATUS_SUCC= "UserStatusChangeSucc";
     public static final String USER_UPDATESTATUS_FAIL= "UserStatusChangeFail";
+    public static final String USER_STATUS_ACTIVE="statusActive";
+    public static final String USER_STATUS_INACTIVE="statusInActive";
 
 
 }

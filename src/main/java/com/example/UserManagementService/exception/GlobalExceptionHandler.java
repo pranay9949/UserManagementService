@@ -19,4 +19,23 @@ public class GlobalExceptionHandler {
         mp.put("Error Message","User Not Found Exception");
         return new ResponseEntity<>(mp, HttpStatus.BAD_REQUEST);
     }
+    @ExceptionHandler(ValidEmailException.class)
+    public ResponseEntity<Map<String ,String>> handleErrorEmail(ValidEmailException ex){
+        Map<String,String> mp = new HashMap<>();
+        mp.put("Error Message",ex.getMessage());
+        return new ResponseEntity<>(mp, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(InvalidPasswordException.class)
+    public ResponseEntity<Map<String ,String>> handleErrorEmail(InvalidPasswordException ex){
+        Map<String,String> mp = new HashMap<>();
+        mp.put("Error Message",ex.getMessage());
+        return new ResponseEntity<>(mp, HttpStatus.BAD_REQUEST);
+    }
+    @ExceptionHandler(EmailExistsException.class)
+    public ResponseEntity<Map<String ,String>> handleErrorEmail(EmailExistsException ex){
+        Map<String,String> mp = new HashMap<>();
+        mp.put("Error Message",ex.getMessage());
+        return new ResponseEntity<>(mp, HttpStatus.BAD_REQUEST);
+    }
 }

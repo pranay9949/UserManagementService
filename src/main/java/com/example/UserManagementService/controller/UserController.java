@@ -3,9 +3,14 @@ package com.example.UserManagementService.controller;
 
 import com.example.UserManagementService.config.AppProperties;
 import com.example.UserManagementService.constants.AppConstants;
+import com.example.UserManagementService.dto.ActivateAccountRequest;
+import com.example.UserManagementService.dto.LoginRequest;
 import com.example.UserManagementService.dto.UserRequest;
 import com.example.UserManagementService.dto.UserResponse;
+import com.example.UserManagementService.exception.EmailExistsException;
+import com.example.UserManagementService.exception.InvalidPasswordException;
 import com.example.UserManagementService.exception.UserNotFoundException;
+import com.example.UserManagementService.exception.ValidEmailException;
 import com.example.UserManagementService.service.UserService;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import org.springframework.http.HttpStatus;
@@ -27,7 +32,7 @@ public class UserController {
     }
 
     @PostMapping("/addUser")
-    public ResponseEntity<String> registerUser(@RequestBody UserRequest request){
+    public ResponseEntity<String> registerUser(@RequestBody UserRequest request) throws EmailExistsException {
         Boolean isSaved = userService.registerUser(request);
         String responseMsg;
         if(isSaved){
@@ -90,5 +95,34 @@ public class UserController {
         return  new ResponseEntity<>(userResponse,HttpStatus.OK);
     }
 
+    @PostMapping("/activateAccount")
+    public ResponseEntity<String> activateAccount(@RequestBody ActivateAccountRequest request) throws InvalidPasswordException, ValidEmailException {
+        Boolean isActivated = userService.activateAccount(request);
+        String responseMsg= null ;
+        if(isActivated){
+            responseMsg="User account Activated";
+
+
+        }
+        return new ResponseEntity<>(responseMsg,HttpStatus.OK);
+
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<String> loginAccount(@RequestBody LoginRequest request) throws ValidEmailException {
+        String  msg = userService.accountLogin(request);
+        return new ResponseEntity<>(msg,HttpStatus.OK);
+    }
+
+
+    @PostMapping("/forgetPassword/{email}")
+    public ResponseEntity<String> passRetrieve(@PathVariable String email) throws ValidEmailException {
+        Boolean isSent = userService.forgetPassword(email);
+        String responseMsg = null;
+        if(isSent){
+            responseMsg="Password Sent Successfully";
+        }
+        return new ResponseEntity<>(responseMsg,HttpStatus.OK);
+    }
 
 }

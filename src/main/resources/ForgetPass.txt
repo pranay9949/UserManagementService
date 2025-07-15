@@ -1,0 +1,17 @@
+<div style="font-family: Arial, sans-serif; font-size: 16px; color: #333;">
+  <p>Hi <strong>{FULL-NAME}</strong>,</p>
+
+  <p>Please find your login credentials below:</p>
+
+  <div style="padding: 10px; background-color: #f2f2f2; border-left: 5px solid #007bff;">
+    <p><strong>Password:</strong> {TEMP-PWD}</p>
+  </div>
+
+  <p style="margin-top: 20px;">
+    <a href="{URL}" style="display: inline-block; background-color: #007bff; color: #fff; padding: 10px 20px; text-decoration: none; border-radius: 4px;">
+      Click here to Change Your Password
+    </a>
+  </p>
+
+  <p style="margin-top: 30px;">Thanks,<br/>Admin Team</p>
+</div>
